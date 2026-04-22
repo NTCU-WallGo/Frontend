@@ -9,8 +9,8 @@
   $: showPwd = false;
   let s='';
 
-  function back() {
-    dispatch('desktop');
+function forget(){
+    dispatch('forget');
   }
   function pwdVisible(){
     showPwd=!showPwd;
@@ -45,6 +45,7 @@
         type="text"
         bind:value={username}
         placeholder="帳號"
+        spellcheck="false"
         on:keydown={(e) => e.key === 'Enter' && enter()}
       />
     </div>
@@ -64,6 +65,13 @@
       </button>
     </div>
     <p id="mes">{s}</p>
+{#if s && s !== 'loading...' && s !== '登入成功!'}
+  <div class="forget-link-container">
+    <button type="button" class="link-button" on:click={forget}>
+      forget password
+    </button>
+  </div>
+{/if}
     <div style="display: flex; gap: 20px; justify-content: center;">
       <button on:click={signup}>Sign Up</button>
       <button on:click={enter}>Enter</button>
@@ -80,7 +88,15 @@
     height: 100%;
     width: 100%;
   }
-
+  .link-button {
+    background: none;
+    border: none;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0;
+  }
   .login-form {
     display: flex;
     align-items: center;
