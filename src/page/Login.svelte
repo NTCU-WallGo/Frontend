@@ -38,7 +38,6 @@
 </script>
 
 <div class="login-container">
-  <button on:click={back} class="top-right-btn">Back</button>
   <h1>Log In</h1>
   <div class="login-form">
     <div class="inputs">
@@ -77,19 +76,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+     margin-top: 10%;
     height: 100%;
     width: 100%;
   }
-  .top-right-btn{
-    margin: 30px 50px;
-    display: flex;
-    align-self: flex-end;
-  }
+
   .login-form {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 300px;
+   
     gap: 10px;
   }
   .inputs input{
