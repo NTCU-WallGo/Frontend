@@ -16,7 +16,7 @@
 <style>
   .back-layer {
     position: fixed;
-    top: 20px;
+    top: 30px;
     left: 20px;
     z-index: 1000;
   }

@@ -72,8 +72,8 @@ Each player may break one wall once per game.
   z-index: 100;
   overflow-y: auto;
   border-radius: 6px;
-    white-space: pre-wrap;
-
+  white-space: pre-wrap;
+  text-align: left;
 }
 
 

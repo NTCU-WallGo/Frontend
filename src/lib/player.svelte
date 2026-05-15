@@ -1,3 +1,4 @@
+<!-- room裡面人的頭像及名稱 -->
 <script>
     export let name = "Player";
 </script>
@@ -47,4 +48,3 @@
     }
 </style>
 
-<!-- room裡面人的頭像及名稱 -->

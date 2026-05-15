@@ -9,16 +9,21 @@
   $: showPwd = false;
   let email='';
   let s="";
-  $: jwtToken = ""; 
+  $: jwtToken = "";
+  $: mesColor = (() => {
+    if (s === '註冊成功!') return '#18af17';
+    if (s === 'loading...') return 'black';
+    return '#af1817'; 
+  })(); 
 
   onMount(() => {
-    window['verify']=(token)=>{
+    (/** @type {any} */ (window))['verify']=(/** @type {any} */token)=>{
       console.log("成功拿到 Token:", token);
       jwtToken=token;
     }
     // 檢查 turnstile 是否載入完成並手動渲染
-    if (window['turnstile']) {
-      window['turnstile'].render('.cf-turnstile');
+    if ((/** @type {any} */ (window))['turnstile']) {
+      (/** @type {any} */ (window))['turnstile'].render('.cf-turnstile');
     }
     console.log()
   });
@@ -31,20 +36,20 @@
   }
   async function enter() {
     if(!jwtToken){
-      document.getElementById('mes').style.color='#af1817';
+      // document.getElementById('mes').style.color='#af1817';
       s='請先完成機器人驗證';
       return ;
     }
 
     try{
-      document.getElementById('mes').style.color='black';
+      // document.getElementById('mes').style.color='black';
       s="loading...";
       const result=await post('/register',JSON.stringify({"username":username,"password":password,"email":email,"captcha_token":jwtToken}),'application/json');
-      document.getElementById('mes').style.color='#18af17';
+      // document.getElementById('mes').style.color='#18af17';
       s="註冊成功!";
       dispatch('signup');
-    }catch(err){
-      document.getElementById('mes').style.color='#af1817';
+    }catch(/** @type {any} */ err){
+      // document.getElementById('mes').style.color='#af1817';
       if(username.length<4){
         s='帳號長度需大於4位';
       }else if(password.length<8){
@@ -92,7 +97,7 @@
       />
     </div>
     <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="verify"></div>
-    <p id="mes">{s}</p>
+    <p id="mes" style:color={mesColor}>{s}</p>
       <button on:click={enter}>Enter</button>
   </div>
 </div>

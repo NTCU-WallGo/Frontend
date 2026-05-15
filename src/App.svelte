@@ -7,6 +7,7 @@
   import Signup from './page/Signup.svelte';
   import DesktopButton from './lib/desktop_button.svelte';
   import Forget from './page/Forget.svelte';
+  import Game from './page/Game.svelte'
 
   let currentPage = 'desktop';
   let roomId = '';
@@ -20,6 +21,7 @@
       getusername();
   
     // 全域禁用拼寫檢查紅線
+    /**@param {any} e*/
     const handleFocus = (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
         e.target.setAttribute('spellcheck', 'false');
@@ -42,9 +44,14 @@
   function handleSignup() {
     currentPage = 'signup';
   }
+  /**@param {any} event*/
   function handleRoom(event) {
     roomId = event.detail.roomId;
     currentPage = 'room';
+  }
+
+  function handleGame(){
+    currentPage='game';
   }
 
   function handleLogout() { // 登出
@@ -68,7 +75,7 @@
 
 {#if currentPage === 'desktop'}
   <Desktop 
-    username={$authStore.user} 
+    username={$authStore.user}
     isLogin={$authStore.isLogin} 
     on:login={handleLogin} 
     on:room={handleRoom} 
@@ -79,7 +86,9 @@
 {:else if currentPage === 'signup'}
   <Signup on:signup={handleHome} on:login={handleLogin}/>
 {:else if currentPage === 'room'}
-  <Room {roomId} on:logout={handleHome} />
+  <Room {roomId} on:logout={handleHome} on:game={handleGame}/>
+{:else if currentPage === 'game'}
+  <Game />
 {/if}
 
 <style>

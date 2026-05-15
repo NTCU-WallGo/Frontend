@@ -8,8 +8,13 @@
   $: password = '';
   $: showPwd = false;
   let s='';
+  $: mesColor = (() => {
+    if (s === '登入成功!') return '#18af17';
+    if (s === 'loading...') return 'black';
+    return '#af1817'; 
+  })();
 
-function forget(){
+  function forget(){
     dispatch('forget');
   }
   function pwdVisible(){
@@ -20,15 +25,15 @@ function forget(){
     FormData.append('username',username);
     FormData.append('password',password);
     try{
-      document.getElementById('mes').style.color='black';
+      // document.getElementById('mes').style.color='black';
       s="loading...";
       const result=await post('/login',FormData,'application/x-www-form-urlencoded');
-      document.getElementById('mes').style.color='#18af17';
+      // document.getElementById('mes').style.color='#18af17';
       s="登入成功!";
       login(result.access_token);
       dispatch('login');
-    }catch(err){
-      document.getElementById('mes').style.color='#af1817';
+    }catch(/** @type {any} */ err){
+      // document.getElementById('mes').style.color='#af1817';
       s=err.message;
     }
   }
@@ -64,14 +69,14 @@ function forget(){
         {/if}
       </button>
     </div>
-    <p id="mes">{s}</p>
-{#if s && s !== 'loading...' && s !== '登入成功!'}
-  <div class="forget-link-container">
-    <button type="button" class="link-button" on:click={forget}>
-      forget password
-    </button>
-  </div>
-{/if}
+    <p id="mes" style:color={mesColor}>{s}</p>
+    {#if s && s !== 'loading...' && s !== '登入成功!'}
+      <div class="forget-link-container">
+        <button type="button" class="link-button" on:click={forget}>
+          forget password
+        </button>
+      </div>
+    {/if}
     <div style="display: flex; gap: 20px; justify-content: center;">
       <button on:click={signup}>Sign Up</button>
       <button on:click={enter}>Enter</button>

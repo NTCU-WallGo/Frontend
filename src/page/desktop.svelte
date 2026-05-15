@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  export let username = '';
+  import Title from '../lib/title.svelte';
+  export let username = undefined;
   export let isLogin;
 
   let roomNumber = '';
@@ -33,7 +34,7 @@
     </div>
   {/if}
   <div class="login-box">
-    <h1 class="title">Quoridor</h1>
+    <h1 class="title"><Title/></h1>
     
     <div  class="input-group">
       <input
@@ -72,6 +73,7 @@
   width: 100%;
 }
 .title {
+  display: flex;
   font-size: 3rem;
   color: white;
   width: 600px;
@@ -79,6 +81,7 @@
   background-color: #9B9B9B;
   border-radius: 0.5rem;
   padding: 1rem;
+  justify-content: center;
 }
 #room-input{
   width: 400px;

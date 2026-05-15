@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { writable } from "svelte/store";
 import {get} from '../api/api.js'
 
@@ -10,6 +12,10 @@ export const authStore=writable({
 });
 
 export async function getusername(){
+    if(!saveToken){
+        return 'Guest';
+    }
+
     try{
         const data=await get('/me');
         const username=data.message.split(", ")[1].split("!")[0]

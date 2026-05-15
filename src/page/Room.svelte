@@ -4,14 +4,17 @@
   import People from '../lib/player.svelte'
 
   export let roomId = '';
-  let players=['aaaa','bbbb','cccc']; //舉例用的，還不確定要怎麼用:(
+  let players=['aaaa','bbbb','cccc','dddd']; //舉例用的，還不確定要怎麼用:(
   const colors=["#ED9E92","#99E884","#81BDD5","#AF7ED2"]; 
   const dispatch = createEventDispatcher();
 
   let showRules = false;
 
-  function handleLogout() {
-    dispatch('logout');
+  // function handleLogout() {
+  //   dispatch('logout');
+  // }
+  function handleStart() {
+    dispatch('game');
   }
 
   function toggleRules() {
@@ -31,9 +34,9 @@
     {/each}
   </div>
   <div class="btn">
-    <button on:click={handleLogout} class="back-btn">Back</button>
+    <!-- <button on:click={handleLogout} class="back-btn">Back</button> -->
     <button on:click={toggleRules} class="rule-btn">Rule</button>
-    <button class="start-btn">Start</button>
+    <button on:click={handleStart} class="start-btn">Start</button>
   </div>
 
   {#if showRules}
@@ -69,9 +72,10 @@
 .btn{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
   margin-top: auto;
   margin-bottom: 30px;
+  margin-right: 210px;
   gap: 30%;
   cursor: pointer;
 }

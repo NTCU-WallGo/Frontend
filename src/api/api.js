@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // export async function callcore() {
 //   try {
 //     const res = await fetch('http://localhost:8000/app/core')
@@ -26,6 +28,7 @@
 //     throw new Error(error.message)
 //   }
 // }
+
 import {logout} from '../lib/auth.js'
 
 const API_BASE='http://localhost:8000/api';
