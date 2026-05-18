@@ -24,7 +24,7 @@
 
     .char {
         display: inline-block;
-        animation-duration: 0.5s;
+        animation-duration: 0.3s;
         animation-iteration-count: infinite;
         animation-direction: alternate;
         animation-timing-function: ease-in-out;
